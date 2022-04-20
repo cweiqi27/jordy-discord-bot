@@ -1,1 +1,1 @@
-# deeznutsgotem
+# Jordy Discord Bot
