@@ -6,7 +6,6 @@ module.exports = {
         .setDescription('Something nice about your mom'),
     async execute(interaction) {
         await interaction.reply('Your mom');
-        await interaction.followUp('is a mother');
         await interaction.deleteReply();
     }
 }

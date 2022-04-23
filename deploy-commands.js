@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 require('dotenv').config();
+const { Player } = require('discord-player');
 
 const TOKEN = process.env.DISCORD_TOKEN;
 const CLIENTID = process.env.CLIENT_ID;
@@ -21,13 +22,13 @@ for (const file of commandFiles) {
 const rest = new REST({ version: '9' }).setToken(TOKEN);
 
 rest.put(Routes.applicationGuildCommands(CLIENTID, GUILDID), { body: commands })
-	.then(() => console.log('Successfully registered application commands.'))
+	.then(() => console.log('[LAND OF OOO] Successfully registered application commands.'))
 	.catch(console.error);
 
 rest.put(Routes.applicationGuildCommands(CLIENTID, MIDTOWNID), { body: commands })
-    .then(() => console.log('Successfully registered application commands.'))
+    .then(() => console.log('[MIDTOWN] Successfully registered application commands.'))
     .catch(console.error);
 
 rest.put(Routes.applicationGuildCommands(CLIENTID, KSLID), { body: commands })
-    .then(() => console.log('Successfully registered application commands.'))
+    .then(() => console.log('[KSL] Successfully registered application commands.'))
     .catch(console.error);
