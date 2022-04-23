@@ -1,6 +1,7 @@
-const { Client, Intents } = require('discord.js');
-require('dotenv').config();
+const fs = require('node:fs');
+const { Client, Intents, Collection } = require('discord.js');
 
+require('dotenv').config();
 const TOKEN = process.env.DISCORD_TOKEN;
 
 const intentsList = new Intents();
@@ -11,25 +12,34 @@ const client = new Client({
     intents: intentsList
 });
 
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.commands.set(command.data.name, command);
+}
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+});
+
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isCommand()) return;
-
-    const { commandName } = interaction;
-
-    if (commandName === 'ping') {
-        await interaction.reply('Pong!');
-    } else if (commandName === 'server') {
-		await interaction.reply(`Server info: \nName: ${interaction.guild.name} \nTotal Members: ${interaction.guild.memberCount}`);
-	} else if (commandName === 'user') {
-		await interaction.reply('User info.');
-	} else if (commandName === 'yourmom') {
-        await interaction.reply('Your mom');
-        await interaction.followUp('is gay');
-    }
-});
 
 client.login(TOKEN);
