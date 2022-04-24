@@ -1,5 +1,5 @@
 {
-  "name": "deeznutsgotem",
+  "name": "jordy-discord-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cweiqi27/deeznutsgotem.git"
+    "url": "git+https://github.com/cweiqi27/jordy-discord-bot.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cweiqi27/deeznutsgotem/issues"
+    "url": "https://github.com/cweiqi27/jordy-discord-bot/issues"
   },
-  "homepage": "https://github.com/cweiqi27/deeznutsgotem#readme",
+  "homepage": "https://github.com/cweiqi27/jordy-discord-bot#readme",
   "keywords": [],
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
